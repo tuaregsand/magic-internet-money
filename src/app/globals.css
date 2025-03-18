@@ -1,26 +1,1464 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+    font-family: 'BlackWizard';
+    src: url('/BlackWizardStraight.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block; /* Ensures text remains invisible until font is loaded */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Remove touch highlight on mobile */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+    color: white;
+    background-color: #1a1030;
+    /* Prevent horizontal scroll and maintain aspect ratios */
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
 }
+
+h2 {
+    font-family: 'BlackWizard', sans-serif;
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+h3 {
+    font-family: 'BlackWizard', sans-serif;
+    font-size: 2rem;
+    color: white;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.section {
+    width: 100%;
+    position: relative;
+    overflow: visible; /* Changed from hidden to visible to allow overlapping */
+    min-height: 120vh;
+    z-index: 1; /* Base z-index */
+}
+
+/* HERO SECTION */
+#hero {
+    background-image: url('/main page bg.png');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 2; /* Higher than default */
+}
+
+.hero-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.social-media-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    z-index: 10;
+}
+
+.social-icon {
+    width: 48px;
+    height: 48px;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 15px rgba(255, 255, 0, 0.7));
+}
+
+.title-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px; /* Reduced from 50px to account for social icons */
+    z-index: 2;
+}
+
+.logo {
+    width: 85%;
+    max-width: 700px;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 0, 0.7));
+}
+
+.wizard-scene {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: visible; /* Changed from hidden to visible to prevent cropping */
+    min-height: 500px;
+}
+
+.wizard {
+    width: 22%;
+    max-width: 220px;
+    position: absolute;
+    bottom: 8%; /* Adjusted to maintain proper balance with books */
+    z-index: 1;
+    transform: translateX(-50%); /* Changed to properly center */
+    left: 50%;
+    margin-left: 0; /* Removed offset */
+}
+
+.books {
+    width: 100%; /* Adjusted to fit properly within view */
+    max-width: 1920px;
+    position: absolute;
+    bottom: -35%; /* Adjusted to prevent top cropping while maintaining overall position */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+    object-fit: contain;
+    height: auto; /* Maintain aspect ratio */
+}
+
+.yellow-book {
+    position: absolute;
+    width: 20%; /* Increased size */
+    max-width: 220px; /* Increased max size */
+    left: 20%; /* Moved further from center */
+    bottom: 38%; /* Moved significantly higher as requested */
+    z-index: 2;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 0, 0.7));
+    animation: float 3s ease-in-out infinite;
+}
+
+.purple-book {
+    position: absolute;
+    width: 25%; /* Increased size */
+    max-width: 280px; /* Increased max size */
+    right: 20%; /* Moved further from center */
+    bottom: 24%; /* Adjusted position to match reference image */
+    z-index: 2;
+    filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.7));
+    animation: float 3.5s ease-in-out infinite 0.5s;
+}
+
+/* Removed the magic-ball as requested */
+
+/* Money styling for other sections, not in hero */
+.money-center {
+    position: absolute;
+    width: 80px;
+    height: auto;
+    animation: float 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 0, 0.5));
+}
+
+.table-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%; /* Adjusted width to fit properly */
+    display: flex;
+    justify-content: center;
+    z-index: 3;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: visible;
+}
+
+.table {
+    width: 120%; /* Increased to ensure proper scaling */
+    max-width: 120%;
+    height: auto;
+    object-fit: contain;
+    transform: translateY(0); /* Prevent any gap at the bottom */
+}
+
+/* ABOUT SECTION */
+#about {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: -4vh; /* Increase overlap with next section */
+    z-index: 3; /* Higher than hero */
+}
+
+.about-frame {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-bg {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+.about-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15%; /* Increased padding to match reference image */
+}
+
+.about-left-content {
+    width: 45%; /* Adjusted to match reference image */
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.about-right-content {
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Changed to align at bottom */
+    padding-bottom: 5%; /* Added padding to match reference */
+}
+
+.spell-wizard {
+    max-width: 90%; /* Reduced size to match reference */
+    height: auto;
+}
+
+/* Wrapper pour le positionnement exact entre les deux sections */
+.divider-wrapper {
+    position: relative;
+    width: 100%;
+    height: 0px; /* Pas de hauteur pour ne pas créer d'espace */
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    z-index: 10;
+}
+
+.money-line-container {
+    position: absolute;
+    width: 180vw; /* Encore plus large pour couverture complète */
+    height: 140px; /* Hauteur augmentée */
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Centrer horizontalement */
+    overflow: visible;
+    pointer-events: none;
+    background-color: transparent;
+}
+
+.money-line-container::before {
+    content: '';
+    position: absolute;
+    top: -40px; /* Position ajustée pour le chevauchement */
+    left: -100%;
+    width: 300%;
+    height: 160px; /* Money lines ENCORE plus grandes */
+    background: url('/money line.png') repeat-x;
+    background-size: auto 100%;
+    transform: rotate(-2deg);
+    animation: slide 90s linear infinite;
+    transform-origin: center center;
+    z-index: 1;
+}
+
+/* Repeating money bills - DANS money line */
+.money-line-container::after {
+    content: '';
+    position: absolute;
+    top: -20px; /* MÊME position que money line */
+    left: -100%;
+    width: 300%;
+    height: 120px; /* MÊME hauteur que money line */
+    transform: rotate(-2deg); /* MÊME rotation */
+    background: url('/money.png') repeat-x;
+    background-size: auto 80%; /* Billets plus grands */
+    background-position-y: center; /* Centré verticalement */
+    animation: slide 90s linear infinite;
+    transform-origin: center center;
+    background-repeat: space; /* Espacement des billets pour qu'ils respirent */
+    background-size: auto 80%;
+    z-index: 2; /* AU-DESSUS de money line */
+}
+
+@keyframes slide {
+    0% {
+        transform: rotate(-2deg) translateX(0);
+    }
+    100% {
+        transform: rotate(-2deg) translateX(-33.33%);
+    }
+}
+
+.money-line {
+    display: none; /* Hide the original image since we're using background-image */
+}
+
+/* Hiding the individual money center image since we're using repeating background */
+.money-center {
+    display: none;
+}
+
+/* TOKENOMICS SECTION */
+#tokenomics {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    color: #fff;
+    margin-top: -4vh; /* Increase overlap with previous section */
+    margin-bottom: -4vh; /* Increase overlap with next section */
+    z-index: 4; /* Higher than about */
+}
+
+.tokenomics-bg {
+    position: relative;
+    width: 100%;
+    min-height: 110vh; /* Slightly reduced height */
+}
+
+.tokenomics-background {
+    width: 100%;
+    max-height: 120vh;
+    display: block;
+    object-fit: cover;
+}
+
+.tokenomics-content-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 5%;
+}
+
+@font-face {
+    font-family: 'BlackWizardStraight';
+    src: url('/BlackWizardStraight.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+.tokenomics-title {
+    font-family: 'BlackWizardStraight', sans-serif;
+    font-size: 5.5rem;
+    margin-bottom: 2rem;
+    color: #fff;
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.9), 0 0 15px rgba(255, 255, 255, 0.5);
+    text-align: center;
+    letter-spacing: 4px;
+    transform: scale(1.1);
+    font-weight: normal;
+    padding-top: 15vh;
+    margin-top: 0;
+    z-index: 10;
+}
+
+.tokenomics-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1400px;
+    gap: 2rem;
+    padding: 0 2rem;
+    position: relative;
+    height: 100%;
+}
+
+.tokenomics-left, .tokenomics-right {
+    width: 30%; /* Increased width to match reference image */
+    text-align: center;
+    z-index: 2;
+    margin-top: 3vh; /* Reduced margin to match reference */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 12vh; /* Adjusted to match reference */
+    align-items: center;
+}
+
+.tokenomics-left p, .tokenomics-right p {
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1.9;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.tokenomics-center {
+    width: 100%;
+    position: static;
+    z-index: 1;
+}
+
+.cauldron-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%; /* Adjusted to match reference */
+    position: absolute;
+    bottom: 15%; /* Adjusted to match reference */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.cauldron {
+    width: 90%; /* Adjusted to match reference */
+    max-width: 700px; /* Adjusted to match reference */
+    height: auto;
+    z-index: 10;
+    filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+    animation: float 4s ease-in-out infinite;
+    transform: scale(1.05); /* Reduced scale to match reference */
+    position: relative;
+}
+
+/* Animation de flottement pour le chaudron */
+@keyframes float {
+    0% { transform: translateY(0) scale(1.15); }
+    50% { transform: translateY(-15px) scale(1.15); }
+    100% { transform: translateY(0) scale(1.15); }
+}
+
+.wizard-hat {
+    display: none; /* Complètement masqué */
+}
+
+/* Money piles supprimés de la section Tokenomics */
+
+/* Money Line Transition */
+/* Removed money-line-transition */
+
+/* Removed money-line-img */
+
+/* MEME SECTION */
+#meme {
+    position: relative;
+    padding: 15vh 0; /* Increased padding for more space */
+    margin-top: -4vh;
+    margin-bottom: -4vh;
+    overflow: visible;
+    min-height: 100vh; /* Full height to properly center background */
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.meme-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: visible;
+    z-index: 1;
+}
+
+.meme-bg-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    position: relative;
+    z-index: 1;
+}
+
+.meme-container {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+}
+
+.meme-scroll-container {
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+    height: 400px; /* Increased height for better visibility */
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.meme-scroll-track {
+    display: flex;
+    gap: 20px;
+    animation: scrollMemes 90s linear infinite; /* Adjusted speed */
+    width: max-content;
+    padding-left: 0;
+    position: relative;
+    will-change: transform;
+}
+
+/* Properly calculated seamless infinite scroll animation */
+@keyframes scrollMemes {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-350px * 7 - 20px * 7)); /* Width of 7 items + 7 gaps */
+    }
+}
+
+.meme-item {
+    flex: 0 0 auto;
+    width: 350px;
+    height: 350px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+.meme-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.meme-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #cccccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+/* SOCIALS SECTION */
+#socials {
+    background-image: url('/socials bg.png');
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    min-height: 110vh;
+    padding-bottom: 738px; /* Match books image height */
+    margin-top: -4vh; /* Increase overlap with previous section */
+    z-index: 6; /* Higher than all */
+}
+
+.socials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.socials-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 30px 80px; /* Further reduced bottom padding to bring hat closer to books */
+    margin-bottom: 0; /* Removed margin completely */
+    position: relative;
+    z-index: 5;
+}
+
+.socials-wizard {
+    width: 50%;
+    display: flex;
+    justify-content: flex-start; 
+    padding-left: 2rem;
+    margin-top: 320px; /* Moved wizard hat further down closer to books */
+}
+
+.wizard-character {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    transform: scale(1.2); /* Slightly reduced scale */
+    animation: float-hat 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba(96, 247, 147, 0.5));
+}
+
+@keyframes float-hat {
+    0% { transform: translateY(0) scale(1.3) rotate(0deg); }
+    50% { transform: translateY(-15px) scale(1.3) rotate(3deg); }
+    100% { transform: translateY(0) scale(1.3) rotate(0deg); }
+}
+
+.socials-text {
+    width: 50%; /* Reduced width significantly */
+    padding-right: 5%; /* Reduced padding */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 30%; /* Push MUCH further to the right */
+    margin-top: 30px; /* Vertical position */
+    /* HERE YOU CAN CONTROL THE TEXT POSITION:
+       - margin-left: controls left/right position (INCREASE to move RIGHT)
+       - margin-top: controls up/down position (INCREASE to move DOWN)
+       - width: controls how much space it takes (DECREASE for more compact text) */
+}
+
+.socials-title {
+    font-family: 'BlackWizardStraight', sans-serif;
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    color: white;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.socials-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.books-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: visible;
+    z-index: 10;
+    height: 738px; /* Updated to match actual image height */
+}
+
+.books-image {
+    width: 100%;
+    max-height: 738px; /* Updated to match actual image height */
+    display: block;
+    object-fit: contain; /* Maintain proper proportions */
+    object-position: bottom;
+}
+
+/* Book social icons positioning */
+.book-social-icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.purple-book-icons {
+    position: absolute;
+    bottom: 290px;
+    left: 66%;
+    transform: translateX(-50%) rotate(3deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+    width: 500px;
+    pointer-events: all;
+    z-index: 50;
+}
+
+.purple-book-icons a {
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.purple-book-icons a:hover {
+    transform: scale(1.2);
+}
+
+.purple-book-icons a img {
+    width: 100px !important;
+    height: 100px !important;
+    display: block;
+}
+
+/* ANIMATIONS */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.6);
+    }
+    to {
+        box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.9), 0 0 30px 20px rgba(70, 130, 180, 0.4);
+    }
+}
+
+/* RESPONSIVE DESIGN */
+/* For larger screens like MacBook fullscreen */
+@media (min-width: 1200px) {
+    #hero {
+        min-height: 800px;
+    }
+    
+    .logo {
+        width: 90%;
+        max-width: 800px;
+        filter: drop-shadow(0 0 25px rgba(255, 255, 0, 0.8));
+    }
+    
+    .social-media-top {
+        gap: 25px;
+        margin-top: 25px;
+    }
+    
+    .social-icon {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .wizard {
+        width: 25%;
+        max-width: 350px;
+    }
+    
+    .yellow-book {
+        width: 20%;
+        max-width: 220px;
+    }
+    
+    .purple-book {
+        width: 20%;
+        max-width: 220px;
+    }
+    
+    .books {
+        width: 120%;
+        max-width: 1920px;
+        bottom: -20%;
+    }
+    
+    .table {
+        width: 120%;
+        max-width: 120%;
+    }
+    
+    h2 {
+        font-size: 5rem;
+    }
+    
+    p {
+        font-size: 1.2rem;
+    }
+    
+    /* Enhanced spacing for large screens */
+    .about-content {
+        padding: 0 10%;
+    }
+    
+    .tokenomics-content {
+        padding: 0 8%;
+    }
+    
+    .meme-scroll-container {
+        height: 500px;
+    }
+}
+
+/* For medium-sized screens (laptops, smaller desktops) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .wizard {
+        width: 22%;
+        max-width: 280px;
+    }
+    
+    .yellow-book {
+        width: 18%;
+        max-width: 200px;
+    }
+    
+    .purple-book {
+        width: 18%;
+        max-width: 200px;
+    }
+    
+    .books {
+        width: 120%;
+        bottom: -25%;
+    }
+    
+    .table-container {
+        width: 120%;
+    }
+}
+
+/* For tablet devices */
+@media (min-width: 768px) and (max-width: 991px) {
+    .books {
+        width: 140%;
+        bottom: -15%;
+    }
+    
+    .table-container {
+        width: 140%;
+    }
+    
+    h2 {
+        font-size: 3.5rem;
+    }
+
+    .wizard {
+        width: 25%;
+        max-width: 250px;
+    }
+
+    .yellow-book {
+        width: 18%;
+        max-width: 180px;
+        left: 20%;
+    }
+
+    .purple-book {
+        width: 18%;
+        max-width: 180px;
+        right: 20%;
+    }
+    
+    .about-content {
+        padding: 0 5%;
+    }
+
+    .about-left-content, .about-right-content {
+        padding: 20px;
+    }
+    
+    .about-left-content {
+        width: 50%;
+    }
+    
+    .about-right-content {
+        width: 50%;
+    }
+
+    .tokenomics-left p, .tokenomics-right p {
+        font-size: 0.9rem;
+    }
+    
+    .tokenomics-left, .tokenomics-right {
+        width: 30%;
+    }
+    
+    .tokenomics-center {
+        width: 40%;
+    }
+    
+    .wizard-scene {
+        min-height: 450px;
+    }
+    
+    .meme-scroll-container {
+        height: 350px;
+    }
+    
+    .book-social-icons {
+        bottom: 25%;
+    }
+    
+    .purple-book-icons a img {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+/* For smaller tablets in landscape */
+@media (min-width: 600px) and (max-width: 767px) {
+    .wizard {
+        width: 25%;
+        max-width: 200px;
+    }
+    
+    .books {
+        width: 150%;
+        bottom: -15%;
+    }
+    
+    .yellow-book {
+        width: 18%;
+        max-width: 160px;
+        left: 22%;
+    }
+    
+    .purple-book {
+        width: 18%;
+        max-width: 160px;
+        right: 22%;
+    }
+    
+    .table-container {
+        width: 150%;
+    }
+    
+    h2 {
+        font-size: 3rem;
+    }
+    
+    p {
+        font-size: 1rem;
+    }
+    
+    .about-content {
+        flex-direction: column !important;
+        padding: 3vh 5vw !important;
+    }
+    
+    .about-left-content, .about-right-content {
+        width: 100% !important;
+        text-align: center !important;
+    }
+    
+    .tokenomics-content {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .tokenomics-left, .tokenomics-right, .tokenomics-center {
+        width: 100% !important;
+        text-align: center !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .tokenomics-center {
+        order: -1 !important;
+    }
+    
+    .meme-scroll-container {
+        height: 300px;
+    }
+    
+    .book-social-icons {
+        position: absolute;
+        bottom: 20%;
+    }
+    
+    .purple-book-icons a img {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* For mobile devices */
+@media screen and (max-width: 768px) {
+    /* Force desktop layout on mobile with fixed width viewport approach */
+    html, body {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        /* Set a fixed viewport size to maintain desktop proportions */
+        min-height: 100vh !important;
+    }
+    
+    /* Scale the entire content to fit mobile screens while preserving aspect ratio */
+    main {
+        width: 100% !important;
+        transform-origin: top center !important;
+        /* Use scale instead of responsive units to maintain exact proportions */
+        transform: scale(1) !important;
+        max-width: 100vw !important;
+    }
+    
+    /* Preserve desktop animations on mobile */
+    .yellow-book, .purple-book, .cauldron, .wizard-character {
+        will-change: transform !important;
+        backface-visibility: hidden !important;
+        transform-style: preserve-3d !important;
+        animation-play-state: running !important;
+    }
+
+    /* Ensure section heights maintain proportions */
+    .section {
+        transform: translateZ(0) !important;
+        backface-visibility: hidden !important;
+        perspective: 1000px !important;
+        min-height: 100vh !important; /* Ensure minimum height matches viewport */
+        height: auto !important;
+        width: 100% !important;
+        overflow: visible !important;
+    }
+    
+    /* Hero section with fixed height to match desktop */
+    #hero {
+        height: 100vh !important;
+        min-height: 100vh !important;
+        position: relative !important;
+        display: block !important;
+    }
+    
+    /* Maintain exact wizard scene proportions */
+    .wizard-scene {
+        position: relative !important;
+        height: 70vh !important;
+        min-height: 500px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: flex-end !important;
+        overflow: visible !important;
+        width: 100% !important;
+    }
+    
+    /* Exact positioning of wizard relative to viewport */
+    .wizard {
+        width: 22% !important;
+        max-width: 220px !important;
+        position: absolute !important;
+        bottom: 8% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        z-index: 3 !important;
+    }
+    
+    /* Books positioned exactly as desktop */
+    .books {
+        width: 100% !important;
+        position: absolute !important;
+        bottom: -35% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        z-index: 0 !important;
+    }
+    
+    /* Yellow book with exact desktop proportions */
+    .yellow-book {
+        position: absolute !important;
+        width: 20% !important;
+        max-width: 220px !important;
+        left: 20% !important;
+        bottom: 38% !important;
+        z-index: 2 !important;
+    }
+    
+    /* Purple book with exact desktop proportions */
+    .purple-book {
+        position: absolute !important;
+        width: 25% !important;
+        max-width: 280px !important;
+        right: 20% !important;
+        bottom: 24% !important;
+        z-index: 2 !important;
+    }
+    
+    /* Table container with exact desktop proportions */
+    .table-container {
+        position: absolute !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        z-index: 3 !important;
+        overflow: visible !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+    
+    /* About section - preserve desktop layout exactly */
+    .about-frame {
+        height: auto !important;
+        position: relative !important;
+        overflow: hidden !important;
+    }
+    
+    .about-bg {
+        width: 100% !important;
+        height: auto !important;
+        object-fit: cover !important;
+    }
+    
+    .about-content {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0 5% !important;
+        flex-direction: row !important; /* Force desktop layout */
+    }
+    
+    .about-left-content {
+        width: 45% !important;
+        padding-right: 20px !important;
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+    }
+    
+    .about-right-content {
+        width: 45% !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        position: relative !important;
+        right: -2% !important;
+        top: -35px !important;
+    }
+    
+    .spell-wizard {
+        max-width: 100% !important;
+        transform: translateX(20%) !important;
+    }
+    
+    /* Tokenomics section - preserve desktop layout exactly */
+    .tokenomics-bg {
+        position: relative !important;
+        height: auto !important;
+        min-height: 100vh !important;
+    }
+    
+    .tokenomics-content-wrapper {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        padding: 10vh 5% 0 !important;
+    }
+    
+    .tokenomics-content {
+        display: flex !important;
+        width: 100% !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin-top: 5vh !important;
+    }
+    
+    .tokenomics-left, .tokenomics-right {
+        width: 30% !important;
+        padding: 0 10px !important;
+    }
+    
+    .tokenomics-center {
+        width: 40% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    
+    .cauldron-container {
+        width: 100% !important;
+        max-width: 350px !important;
+        margin: 0 auto !important;
+    }
+    
+    .cauldron {
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 auto !important;
+    }
+    
+    /* Meme section - ensure smooth scrolling */
+    #meme {
+        min-height: 100vh !important;
+        overflow: hidden !important;
+    }
+    
+    .meme-container {
+        padding: 0 !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+        padding-top: 25vh !important;
+    }
+    
+    .meme-scroll-container {
+        width: 100% !important;
+        overflow: hidden !important;
+    }
+    
+    .meme-item {
+        margin: 0 20px !important;
+        flex: 0 0 auto !important;
+        width: 280px !important;
+        height: 280px !important;
+    }
+    
+    /* Socials section - preserve desktop layout exactly */
+    #socials {
+        min-height: 100vh !important;
+        position: relative !important;
+    }
+    
+    .socials-container {
+        min-height: 50vh !important;
+    }
+    
+    .socials-content {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 10vh 5% 0 !important;
+    }
+    
+    .socials-wizard {
+        width: 40% !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+    
+    .socials-text {
+        width: 50% !important;
+        padding-right: 5% !important;
+    }
+    
+    /* Books footer positioned exactly as desktop */
+    .books-footer {
+        position: relative !important;
+        width: 100% !important;
+        margin-top: 10vh !important;
+    }
+    
+    .book-social-icons {
+        position: absolute !important;
+        width: 100% !important;
+        height: 100% !important;
+        top: 0 !important;
+        left: 0 !important;
+    }
+    
+    .purple-book-icons {
+        position: absolute !important;
+        display: flex !important;
+        gap: 15px !important;
+        width: 300px !important;
+        bottom: 250px !important;
+        left: 65% !important;
+        transform: translateX(-50%) !important;
+    }
+    
+    /* Force desktop scroll behavior for meme section */
+    @keyframes scrollMemes {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+    
+    .meme-scroll-track {
+        animation: scrollMemes 60s linear infinite !important;
+        will-change: transform !important;
+    }
+    
+    /* Force desktop scroll behavior for money line */
+    @keyframes slide {
+        0% {
+            transform: rotate(-2deg) translateX(0);
+        }
+        100% {
+            transform: rotate(-2deg) translateX(-33.33%);
+        }
+    }
+    
+    .money-line-container::before, .money-line-container::after {
+        animation: slide 90s linear infinite !important;
+        will-change: transform !important;
+    }
+}
+
+/* For smaller mobile screens, maintain the exact layout while adjusting only critical elements */
+@media screen and (max-width: 480px) {
+    /* Set fixed font sizes to match desktop proportions */
+    h2 {
+        font-size: 3rem !important;
+    }
+    
+    p {
+        font-size: 0.9rem !important;
+    }
+    
+    /* Adjust social icons size */
+    .social-icon {
+        width: 40px !important;
+        height: 40px !important;
+    }
+    
+    /* Preserve wizard positioning */
+    .wizard {
+        width: 25% !important;
+        max-width: 200px !important;
+    }
+    
+    /* Adjust tokenomics layout slightly */
+    .tokenomics-content {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .tokenomics-left, .tokenomics-right {
+        width: 80% !important;
+        text-align: center !important;
+        margin: 10px 0 !important;
+    }
+    
+    .tokenomics-center {
+        width: 60% !important;
+        margin: 20px 0 !important;
+    }
+    
+    /* Adjust about section layout */
+    .about-content {
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    
+    .about-left-content {
+        width: 80% !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .about-right-content {
+        width: 60% !important;
+        right: 0 !important;
+        top: 0 !important;
+    }
+    
+    /* Adjust socials section layout */
+    .socials-content {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .socials-wizard {
+        width: 60% !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .socials-text {
+        width: 80% !important;
+        padding-right: 0 !important;
+        text-align: center !important;
+    }
+    
+    /* Adjust footer icon positioning */
+    .purple-book-icons {
+        bottom: 220px !important;
+        left: 62% !important;
+        width: 250px !important;
+        gap: 12px !important;
+    }
+    
+    .purple-book-icons a img {
+        width: 50px !important;
+        height: 50px !important;
+    }
+}
+
+/* For extremely small screens */
+@media screen and (max-width: 360px) {
+    h2 {
+        font-size: 2.5rem !important;
+    }
+    
+    .purple-book-icons {
+        bottom: 200px !important;
+        left: 60% !important;
+        width: 220px !important;
+        gap: 10px !important;
+    }
+    
+    .purple-book-icons a img {
+        width: 45px !important;
+        height: 45px !important;
+    }
+    
+    .wizard {
+        width: 28% !important;
+    }
+}
+
+/* Add viewport meta tag in JavaScript to force desktop width */
+@media screen and (max-width: 768px) {
+    /* This will be added via JS */
+}
+
+/* Ensure all images maintain aspect ratios correctly */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+

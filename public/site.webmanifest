@@ -1,0 +1,19 @@
+{
+  "name": "Magic Internet Money",
+  "short_name": "MIM",
+  "icons": [
+    {
+      "src": "/Pfp_.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/Pfp_.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#1a1030",
+  "background_color": "#1a1030",
+  "display": "standalone"
+}
