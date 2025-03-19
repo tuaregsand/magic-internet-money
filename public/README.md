@@ -1,36 +1,24 @@
-# Magic Internet Money Website
+# Magic Internet Money
 
-A magical cryptocurrency-themed website with a wizard aesthetic.
-
-## Project Structure
-
-```
-- index.html           # Main HTML file
-- styles.css           # CSS styles
-- script.js            # JavaScript for animations and interactions
-- BlackWizardStraight.otf  # Custom font for headers
-- Various image assets  # Background images, icons, and character illustrations
-```
+A wizardly crypto-themed website with responsive design for both desktop and mobile.
 
 ## Features
 
-- Responsive design that works on all screen sizes
-- Custom wizard-themed visual elements
-- Smooth animations and transitions
-- Sections for About, Tokenomics, Memes, and Social links
+- Responsive layout that maintains consistent appearance across devices
+- Animated elements including floating books, wizard character, and cauldron
+- Scrolling meme gallery
+- Tokenomics information section
+- Social media integration
 
-## Setup
+## Mobile Optimization
 
-1. Simply open the `index.html` file in your web browser to view the website.
-2. All assets are referenced with relative paths and should load properly if kept in the same directory structure.
+The site uses device detection to load mobile-specific CSS that preserves the desktop appearance while ensuring proper display on smaller screens.
 
-## Customization
+## Deployment
 
-- Replace the placeholder "Lorem ipsum" text with your actual content
-- Update links in the social section to point to your actual social media accounts
-- Replace or modify any images as needed
+The site is deployed via GitHub Pages and can be accessed at:
+[https://tuaregsand.github.io/magic-internet-money](https://tuaregsand.github.io/magic-internet-money)
 
-## Credits
+## License
 
-- Character illustrations and design assets are part of the Magic Internet Money brand
-- Custom font: BlackWizardStraight 
+© 2024 All Rights Reserved 
